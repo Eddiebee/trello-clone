@@ -9,7 +9,7 @@ const buttonStyles: React.CSSProperties = {
   boxShadow: "none",
 };
 
-export const App = () => {
+export const App: React.FC = () => {
   return <AppContainer>Columns will go here</AppContainer>;
 };
 
