@@ -1,4 +1,5 @@
 import * as React from "react"; // strictly speaking this is the right way to import React
+import { useAppState } from "./state/AppStateContext";
 import { Column } from "./Column";
 import { Card } from "./Card";
 import { AddNewItem } from "./AddNewItem";
@@ -13,17 +14,12 @@ const buttonStyles: React.CSSProperties = {
 };
 
 export const App = () => {
+  const { lists } = useAppState();
   return (
     <AppContainer>
-      <Column text="To Do">
-        <Card text="Generate app scaffold" />
-      </Column>
-      <Column text="In Progress">
-        <Card text="Learn TypeScript" />
-      </Column>
-      <Column text="Done">
-        <Card text="Begin to use static typing" />
-      </Column>
+      {lists.map((list) => (
+        <Column text={list.text} key={list.id} id={list.id} />
+      ))}
       <AddNewItem toggleButtonText="+ Add another list" onAdd={console.log} />
     </AppContainer>
   );
