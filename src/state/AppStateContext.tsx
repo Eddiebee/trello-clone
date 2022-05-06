@@ -1,10 +1,10 @@
-import { createContext, useContext, FC, PropsWithChildren } from "react";
+import { createContext, useContext, FC } from "react";
 
 // we need to provide the type for our context.
-type AppStateContextProps = PropsWithChildren<{
+type AppStateContextProps = {
   lists: List[];
   getTasksByListId(id: string): Task[];
-}>;
+};
 
 const AppStateContext = createContext<AppStateContextProps>(
   {} as AppStateContextProps
@@ -45,7 +45,7 @@ const appData: AppState = {
   ],
 };
 
-export const AppStateProvider: FC<AppStateContextProps> = ({ children }) => {
+export const AppStateProvider = ({ children }: any) => {
   const { lists } = appData;
 
   const getTasksByListId = (id: string) => {
