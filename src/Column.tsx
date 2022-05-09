@@ -1,8 +1,10 @@
-import { Card } from "./Card";
-import { ColumnContainer, ColumnTitle } from "./styles";
+import { useRef } from "react";
+import { useItemDrag } from "./utils/useItemDrag";
 import { AddNewItem } from "./AddNewItem";
 import { useAppState } from "./state/AppStateContext";
 import { addTask } from "./state/actions";
+import { Card } from "./Card";
+import { ColumnContainer, ColumnTitle } from "./styles";
 
 type ColumnProps = {
   text: string; // the text prop will be required by default and we want it to stay so
@@ -10,9 +12,13 @@ type ColumnProps = {
 };
 
 export const Column = ({ text, id }: ColumnProps) => {
-  const { getTasksByListId, dispatch } = useAppState();
-
+  const { draggedItem, getTasksByListId, dispatch } = useAppState();
   const tasks = getTasksByListId(id);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { drag } = useItemDrag({ type: "COLUMN", id, text });
+
+  drag(ref);
 
   return (
     <ColumnContainer>
