@@ -21,7 +21,7 @@ export const Column = ({ text, id }: ColumnProps) => {
   drag(ref);
 
   return (
-    <ColumnContainer>
+    <ColumnContainer ref={ref}>
       <ColumnTitle>{text}</ColumnTitle>
       {tasks.map((task) => (
         <Card text={task.text} key={task.id} id={task.id} />
